@@ -6,6 +6,7 @@
 //  Forked and updated by Rob Mason in 2022.
 
 import AppKit
+import os.log
 
 public struct AppMover {
     
@@ -19,7 +20,7 @@ public struct AppMover {
         do {
             try moveApp(installedName: .current, replaceNewerVersions: false, skipDebugBuilds: true)
         } catch {
-            NSLog("Moving app: \(error)")
+            os_log("Moving app: %{public}@", type: .error, String(describing: error))
         }
     }
     
@@ -45,7 +46,7 @@ public struct AppMover {
     ) throws {
         #if DEBUG
         if skipDebugBuilds {
-            NSLog("AppMover: skipping move for debug build")
+            os_log("AppMover: skipping move for debug build", type: .info)
             return
         }
         #endif
@@ -69,14 +70,16 @@ public struct AppMover {
         // App at install destination is already running. Switch to that app and terminate this instance.
         // Killing another running process wouldn't be a good idea anyway.
         guard !isApplicationRunning(url: destinationUrl) else {
-            NSLog("Fatal: App already running at \(destinationUrl). Switching to app then killing this process.")
+            os_log("Fatal: App already running at %{public}@. Switching to app then killing this process.",
+                   type: .info, String(describing: destinationUrl))
             NSWorkspace.shared.open(destinationUrl)
             exit(0)
         }
         
         // App at install destination is newer than this version
         guard replaceNewerVersions == true || !isNewerApplicationInstalled(url: destinationUrl) else {
-            NSLog("Fatal: Newer app version installed at \(destinationUrl). Switching to app then killing this process.")
+            os_log("Fatal: Newer app version installed at %{public}@. Switching to app then killing this process.",
+                   type: .info, String(describing: destinationUrl))
             NSWorkspace.shared.open(destinationUrl)
             exit(0)
         }
@@ -123,7 +126,8 @@ public struct AppMover {
         do {
             try FileManager.default.trashItem(at: Bundle.main.bundleURL, resultingItemURL: nil)
         } catch {
-            NSLog("Trashing \(destinationUrl) failed: \(error)")
+            os_log("Trashing %{public}@ failed: %{public}@",
+                   type: .error, String(describing: destinationUrl), String(describing: error))
         }
         
         // Spawn a separate process to launch the new app once this process has been killed
@@ -217,17 +221,16 @@ public struct AppMover {
     
     static func isNewerApplicationInstalled(url: URL) -> Bool {
         guard FileManager.default.fileExists(atPath: url.path) else {
-            NSLog("No file exists at \(url.path)")
             return false
         }
         
         guard let installedVersion = MDItemCopyAttribute(MDItemCreateWithURL(kCFAllocatorDefault, url as CFURL), kMDItemVersion) as? String else {
-            NSLog("Failed to retrieve kMDItemVersion for \(url)")
+            os_log("Failed to retrieve kMDItemVersion for %{public}@", type: .error, String(describing: url))
             return false
         }
         
         guard let thisVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String else {
-            NSLog("Failed to retrieve CFBundleShortVersionString from bundle")
+            os_log("Failed to retrieve CFBundleShortVersionString from bundle", type: .error)
             return false
         }
                         
