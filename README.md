@@ -62,6 +62,11 @@ The `replaceNewerVersions` parameter can also be specified to control whether th
 replace an existing installed app with a newer `CFBundleShortVersionString` (`true`), or switch
 to the installed app instead (`false`).
 
+You can also specify a `destinationName` if you'd like to guarantee that the app is named a
+particular way in the Applications folder.
+e.g. ```AppMover.moveIfNecessary(destinationName: .CFBundleName)``` to use the CFBundleName,
+which can be useful to prevent propogation of suffixes added by Archive Utility, e.g. "MyApp-1.app"
+
 ## Credits
 
 Inspired by [LetsMove](https://github.com/potionfactory/LetsMove/).
