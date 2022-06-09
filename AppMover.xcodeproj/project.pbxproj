@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		D46391E327BF044400E573B5 /* AppMover.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46391E127BF044400E573B5 /* AppMover.swift */; };
-		D46391E427BF044400E573B5 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46391E227BF044400E573B5 /* Extensions.swift */; };
 		OBJ_33 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
 /* End PBXBuildFile section */
 
@@ -17,7 +16,6 @@
 		D46391DF27BF044400E573B5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = Info.plist; path = AppMover/Info.plist; sourceTree = SOURCE_ROOT; };
 		D46391E027BF044400E573B5 /* AppMover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppMover.h; path = AppMover/AppMover.h; sourceTree = SOURCE_ROOT; };
 		D46391E127BF044400E573B5 /* AppMover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppMover.swift; path = AppMover/AppMover.swift; sourceTree = SOURCE_ROOT; };
-		D46391E227BF044400E573B5 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = AppMover/Extensions.swift; sourceTree = SOURCE_ROOT; };
 		OBJ_16 /* AppMover.xcworkspace */ = {isa = PBXFileReference; lastKnownFileType = wrapper.workspace; path = AppMover.xcworkspace; sourceTree = SOURCE_ROOT; };
 		OBJ_17 /* AppMover-Demo */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "AppMover-Demo"; sourceTree = SOURCE_ROOT; };
 		OBJ_19 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -70,7 +68,6 @@
 			children = (
 				D46391E027BF044400E573B5 /* AppMover.h */,
 				D46391E127BF044400E573B5 /* AppMover.swift */,
-				D46391E227BF044400E573B5 /* Extensions.swift */,
 				D46391DF27BF044400E573B5 /* Info.plist */,
 			);
 			name = AppMover;
@@ -143,7 +140,6 @@
 			buildActionMask = 0;
 			files = (
 				D46391E327BF044400E573B5 /* AppMover.swift in Sources */,
-				D46391E427BF044400E573B5 /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -172,7 +168,7 @@
 				INFOPLIST_FILE = AppMover/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				OTHER_CFLAGS = "$(inherited)";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
@@ -202,7 +198,7 @@
 				INFOPLIST_FILE = AppMover/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				OTHER_CFLAGS = "$(inherited)";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
@@ -233,7 +229,7 @@
 					"SWIFT_PACKAGE=1",
 					"DEBUG=1",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_SWIFT_FLAGS = "$(inherited) -DXcode";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -277,7 +273,7 @@
 					"$(inherited)",
 					"SWIFT_PACKAGE=1",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				OTHER_SWIFT_FLAGS = "$(inherited) -DXcode";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
