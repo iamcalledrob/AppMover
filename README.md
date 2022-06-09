@@ -1,19 +1,11 @@
 # AppMover (Fork)
-[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
-
-Framework for moving your application bundle to Applications folder on launch.
+Swift package to moving your application bundle to Applications folder on launch.
 
 ![OGSwitch for macOS](screen.png "AppMover")
 
 Requirements
 ------------
 Builds and runs on macOS 10.15 or higher. Does NOT support sandboxed applications.
-
-
-## Installation (Carthage)
-Configure your Cartfile to use `AppMover`:
-
-```github "iamcalledrob/AppMover" ~> 1.0```
 
 Requires Swift 5.
 
@@ -41,12 +33,31 @@ if AppMover.isInstalled {
 }
 ```
 
-You can also specify a `installedName` if you'd like to guarantee that the app is named a
-particular way in the Applications folder. e.g. ```AppMover.moveApp(installedName: .CFBundleName)```
-to use the CFBundleName, which can be useful to prevent propogation of suffixes added by Archive Utility,
-like "MyApp-1.app"
+Full function signature:
+```swift
+public static func moveApp(
+    installedName: AppName = .CFBundleName,
+    stringBuilder: (_ needsAuth: Bool) -> Strings = Strings.standard,
+    replaceNewerVersions: Bool = false,
+    skipDebugBuilds: Bool = true
+)
+```
 
-User Interface strings can be customised by passing in a `stringBuilder` parameter, e.g.
+`installedName`: Specify a name if you'd like to guarantee that the app is named a particular way
+when copied into the Applications folder.
+```swift
+public enum AppName {
+    /// CFBundleName from Info.plist
+    /// This can be useful to prevent propogation of suffixes added by Archive Utility, e.g. "MyApp-1.app"
+    case CFBundleName
+    /// Name of currently running .app in its current location on disk, e.g. "MyApp.app" or "MyApp-1.app"
+    case current
+    /// Arbitrary name (excluding ".app" suffix)
+    case custom(String)
+}
+```
+
+`stringBuilder`: User Interface strings can be customised using this parameter, e.g.
 ```swift
 try AppMover.moveApp(stringBuilder: { needsAuth in
     Strings(
@@ -58,14 +69,12 @@ try AppMover.moveApp(stringBuilder: { needsAuth in
 })
 ```
 
-The `replaceNewerVersions` parameter can also be specified to control whether the app should
-replace an existing installed app with a newer `CFBundleShortVersionString` (`true`), or switch
-to the installed app instead (`false`).
+`replaceNewerVersions`: Specifies whether the current app should replace a newer version that's
+already installed. If `false`, this app will be killed and the newer version launched instead.
+This can be useful to correct accidental launches of older versions from the Downloads folder,
+for example. The `CFBundleShortVersionString` is used for comparison.
 
-You can also specify a `destinationName` if you'd like to guarantee that the app is named a
-particular way in the Applications folder.
-e.g. ```AppMover.moveIfNecessary(destinationName: .CFBundleName)``` to use the CFBundleName,
-which can be useful to prevent propogation of suffixes added by Archive Utility, e.g. "MyApp-1.app"
+`skipDebugBuilds`: If true, moving will be skipped when built in a debug configuration.
 
 ## Credits
 
@@ -75,6 +84,7 @@ Inspired by [LetsMove](https://github.com/potionfactory/LetsMove/).
 The MIT License (MIT)
 
 Copyright (c) 2020 Oskar Groth
+Forked and updated by Rob Mason in 2022.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in

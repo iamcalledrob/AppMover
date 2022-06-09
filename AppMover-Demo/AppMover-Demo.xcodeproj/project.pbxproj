@@ -3,31 +3,16 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		75492BC223AD66AF004823F1 /* AppMover.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75492BC123AD66AF004823F1 /* AppMover.framework */; };
-		75492BC323AD66AF004823F1 /* AppMover.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 75492BC123AD66AF004823F1 /* AppMover.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		75647A3523AD661300C8E88E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75647A3423AD661300C8E88E /* AppDelegate.swift */; };
 		75647A3723AD661300C8E88E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75647A3623AD661300C8E88E /* ViewController.swift */; };
 		75647A3923AD661400C8E88E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75647A3823AD661400C8E88E /* Assets.xcassets */; };
 		75647A3C23AD661400C8E88E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75647A3A23AD661400C8E88E /* Main.storyboard */; };
+		D44F2FF6285280C6004FF606 /* AppMover in Frameworks */ = {isa = PBXBuildFile; productRef = D44F2FF5285280C6004FF606 /* AppMover */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		75492BC423AD66AF004823F1 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				75492BC323AD66AF004823F1 /* AppMover.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		75492BC123AD66AF004823F1 /* AppMover.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AppMover.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -38,6 +23,7 @@
 		75647A3B23AD661400C8E88E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		75647A3D23AD661400C8E88E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		75647A3E23AD661400C8E88E /* AppMover_Demo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AppMover_Demo.entitlements; sourceTree = "<group>"; };
+		D44F2FF4285280AB004FF606 /* AppMover */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = AppMover; path = ..; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,7 +31,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				75492BC223AD66AF004823F1 /* AppMover.framework in Frameworks */,
+				D44F2FF6285280C6004FF606 /* AppMover in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +49,7 @@
 		75647A2823AD661300C8E88E = {
 			isa = PBXGroup;
 			children = (
+				D44F2FF3285280AB004FF606 /* Packages */,
 				75647A3323AD661300C8E88E /* AppMover-Demo */,
 				75647A3223AD661300C8E88E /* Products */,
 				75492BC023AD66AF004823F1 /* Frameworks */,
@@ -90,6 +77,14 @@
 			path = "AppMover-Demo";
 			sourceTree = "<group>";
 		};
+		D44F2FF3285280AB004FF606 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				D44F2FF4285280AB004FF606 /* AppMover */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -100,13 +95,15 @@
 				75647A2D23AD661300C8E88E /* Sources */,
 				75647A2E23AD661300C8E88E /* Frameworks */,
 				75647A2F23AD661300C8E88E /* Resources */,
-				75492BC423AD66AF004823F1 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = "AppMover-Demo";
+			packageProductDependencies = (
+				D44F2FF5285280C6004FF606 /* AppMover */,
+			);
 			productName = "AppMover-Demo";
 			productReference = 75647A3123AD661300C8E88E /* AppMover-Demo.app */;
 			productType = "com.apple.product-type.application";
@@ -359,6 +356,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D44F2FF5285280C6004FF606 /* AppMover */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AppMover;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 75647A2923AD661300C8E88E /* Project object */;
 }

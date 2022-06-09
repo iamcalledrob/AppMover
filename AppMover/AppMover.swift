@@ -9,6 +9,7 @@ import AppKit
 
 public struct AppMover {
     
+    /// Returns whether the current bundle is located inside any Applications folder.
     public static var isInstalled: Bool {
         return isInsideApplicationsFolder(url: Bundle.main.bundleURL)
     }
@@ -16,7 +17,7 @@ public struct AppMover {
     /// Backwards-compatible non-throwing implementation of `moveApp`.
     public static func moveIfNecessary() {
         do {
-            try moveApp(installedName: .current, replaceNewerVersions: false)
+            try moveApp(installedName: .current, replaceNewerVersions: false, skipDebugBuilds: true)
         } catch {
             NSLog("Moving app: \(error)")
         }
@@ -30,6 +31,7 @@ public struct AppMover {
     ///    - replaceNewerVersions: Specifies whether the current app should replace a newer version that's already installed.
     ///      If `false`, this app will be killed and the newer version launched instead. This can be useful to correct accidental launches of
     ///      older versions from the Downloads folder, for example. The `CFBundleShortVersionString` is used for comparison.
+    ///    - skipDebugBuilds: If true, moving will be skipped when built in a debug configuration.
     ///
     /// If a move is necessary, this function will block until operations are complete.
     ///
@@ -38,8 +40,16 @@ public struct AppMover {
     public static func moveApp(
         installedName: AppName = .CFBundleName,
         stringBuilder: (_ needsAuth: Bool) -> Strings = Strings.standard,
-        replaceNewerVersions: Bool = false
+        replaceNewerVersions: Bool = false,
+        skipDebugBuilds: Bool = true
     ) throws {
+        #if DEBUG
+        if skipDebugBuilds {
+            NSLog("AppMover: skipping move for debug build")
+            return
+        }
+        #endif
+        
         guard !isInsideApplicationsFolder(url: Bundle.main.bundleURL) else {
             return
         }
