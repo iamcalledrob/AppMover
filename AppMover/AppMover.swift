@@ -31,7 +31,7 @@ public struct AppMover {
     ///    - stringBuilder: Allows for customising of prompt strings, passing in whether admin authentication is needed for the install.
     ///    - replaceNewerVersions: Specifies whether the current app should replace a newer version that's already installed.
     ///      If `false`, this app will be killed and the newer version launched instead. This can be useful to correct accidental launches of
-    ///      older versions from the Downloads folder, for example. The `CFBundleShortVersionString` is used for comparison.
+    ///      older versions from the Downloads folder, for example. The `CFBundleVersion` is used for comparison.
     ///    - skipDebugBuilds: If true, moving will be skipped when built in a debug configuration.
     ///
     /// If a move is necessary, this function will block until operations are complete.
@@ -224,13 +224,13 @@ public struct AppMover {
             return false
         }
         
-        guard let installedVersion = MDItemCopyAttribute(MDItemCreateWithURL(kCFAllocatorDefault, url as CFURL), kMDItemVersion) as? String else {
-            os_log("Failed to retrieve kMDItemVersion for %{public}@", type: .error, String(describing: url))
+        guard let installedVersion = Bundle(url: url)?.infoDictionary?["CFBundleVersion"] as? String else {
+            os_log("Failed to retrieve CFBundleVersion from app at %{public}@", type: .error, String(describing: url))
             return false
         }
         
-        guard let thisVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String else {
-            os_log("Failed to retrieve CFBundleShortVersionString from bundle", type: .error)
+        guard let thisVersion = Bundle.main.infoDictionary?["CFBundleVersion"] as? String else {
+            os_log("Failed to retrieve CFBundleVersion from current app", type: .error)
             return false
         }
                         
